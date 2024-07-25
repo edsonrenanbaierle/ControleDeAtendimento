@@ -1,0 +1,17 @@
+{
+    "name": "imply/atendimento",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Edson Renan Baierle",
+            "email": "ebaierle@imply.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    }
+}
