@@ -2,7 +2,7 @@ CREATE DATABASE atendimento;
 USE atendimento;
 
 CREATE TABLE patient(
-	idPatient INT PRIMARY KEY AUTO_INCREMENT,
+	idPatient VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
 	allergies TEXT,
 	cpf VARCHAR(11) NOT NULL,
 	name VARCHAR(255) NOT NULL,
@@ -11,18 +11,18 @@ CREATE TABLE patient(
 );
 
 CREATE TABLE doctor(
-	idDoctor INT PRIMARY KEY AUTO_INCREMENT,
+	idDoctor VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
 	name VARCHAR(255) NOT NULL,
 	crm VARCHAR(11) NOT NULL,
 	specialization VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE service (
-    idService INT PRIMARY KEY AUTO_INCREMENT,
+    idService VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     openingHours DATETIME,
     status ENUM('scheduled', 'completed', 'canceled') NOT NULL,
-    idDoctor INT NOT NULL,
-    idPatien INT NOT NULL,
+    idDoctor VARCHAR(255) NOT NULL,
+    idPatien VARCHAR(255) NOT NULL,
     FOREIGN KEY (idDoctor) REFERENCES doctor(idDoctor),
     FOREIGN KEY (idPatien) REFERENCES patient(idPatient)
 );
