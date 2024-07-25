@@ -2,7 +2,7 @@
 
 namespace App\models;
 
-class User
+class Patient
 {
-
+    
 }

@@ -17,8 +17,12 @@ CREATE TABLE doctor(
 	specialization VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE service(
-	idService INT PRIMARY KEY AUTO_INCREMENT,
-	openingHours DATETIME,
-	status ENUM('sheduled', 'completed', 'canceled') NOT NULL
+CREATE TABLE service (
+    idService INT PRIMARY KEY AUTO_INCREMENT,
+    openingHours DATETIME,
+    status ENUM('scheduled', 'completed', 'canceled') NOT NULL,
+    idDoctor INT NOT NULL,
+    idPatien INT NOT NULL,
+    FOREIGN KEY (idDoctor) REFERENCES doctor(idDoctor),
+    FOREIGN KEY (idPatien) REFERENCES patient(idPatient)
 );
