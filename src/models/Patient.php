@@ -29,7 +29,7 @@ class Patient
         $this->setTelephone($telephone);
     }
 
-    public function getIdPatient()
+    public function getIdPatient() : string
     {
         return $this->idPatient;
     }
@@ -39,7 +39,7 @@ class Patient
         $this->idPatient = $idPatient;
     }
 
-    public function getAllergies()
+    public function getAllergies() : string
     {
         return $this->allergies;
     }
@@ -49,27 +49,24 @@ class Patient
         $this->allergies = $allergies;
     }
 
-    public function getCpf()
+    public function getCpf() : string
     {
         return $this->cpf;
     }
 
     private function setCpf(string $cpf)
     {
-        // Extrai somente os números
         $cpf = preg_replace('/[^0-9]/is', '', $cpf);
 
-        // Verifica se foi informado todos os digitos corretamente
         if (strlen($cpf) != 11) {
             throw new Exception("CPF deve conter 11 digitos");
         }
 
-        // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
         if (preg_match('/(\d)\1{10}/', $cpf)) {
             throw new Exception("CPF inválido");
         }
 
-        // Faz o calculo para validar o CPF
+        // Faz o calculo para validar o CPF / calculation to validate CPF
         for ($t = 9; $t < 11; $t++) {
             for ($d = 0, $c = 0; $c < $t; $c++) {
                 $d += $cpf[$c] * (($t + 1) - $c);
@@ -82,7 +79,7 @@ class Patient
         $this->cpf = $cpf;
     }
 
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -93,7 +90,7 @@ class Patient
         $this->name = $name;
     }
 
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
@@ -104,8 +101,8 @@ class Patient
         $this->email = $email;
     }
 
-    public function getTelephone()
-    {
+    public function getTelephone() : string
+    { 
         return $this->telephone;
     }
 
