@@ -19,7 +19,7 @@ CREATE TABLE doctor(
 
 CREATE TABLE service (
     idService VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
-    openingHours DATETIME,
+    openingHours DATETIME NOT NULL,
     status ENUM('scheduled', 'completed', 'canceled') NOT NULL,
     idDoctor VARCHAR(255) NOT NULL,
     idPatien VARCHAR(255) NOT NULL,
