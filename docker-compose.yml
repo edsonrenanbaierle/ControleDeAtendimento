@@ -1,7 +1,7 @@
 services:
   php:
     image: php:8.2-apache
-    container_name: meu-php-desafio3-2
+    container_name: atendimento-php
     ports:
       - "8080:80"
     volumes:
@@ -12,7 +12,7 @@ services:
 
   db:
     image: mysql:latest
-    container_name: meu-mysql-desafio3-2
+    container_name: atendimento-mysql
     ports:
       - "3306:3306"
     volumes:

@@ -6,20 +6,20 @@ use Exception;
 
 class Patient
 {
-    private ?string $idPatient;
     private string $allergies;
     private string $cpf;
     private string $name;
     private string $email;
     private string $telephone;
+    private ?string $idPatient;
 
     function __construct(
-        string $idPatient = null,
         string $allergies,
         string $cpf,
         string $name,
         string $email,
-        string $telephone
+        string $telephone,
+        ?string $idPatient = null,
     ) {
         $this->setIdPatient($idPatient);
         $this->setAllergies($allergies);
@@ -29,17 +29,17 @@ class Patient
         $this->setTelephone($telephone);
     }
 
-    public function getIdPatient() : string
+    public function getIdPatient(): string
     {
         return $this->idPatient;
     }
 
-    private function setIdPatient(string $idPatient)
+    private function setIdPatient(string|null $idPatient)
     {
         $this->idPatient = $idPatient;
     }
 
-    public function getAllergies() : string
+    public function getAllergies(): string
     {
         return $this->allergies;
     }
@@ -49,7 +49,7 @@ class Patient
         $this->allergies = $allergies;
     }
 
-    public function getCpf() : string
+    public function getCpf(): string
     {
         return $this->cpf;
     }
@@ -79,35 +79,47 @@ class Patient
         $this->cpf = $cpf;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
     private function setName(string $name)
     {
-        if(strlen($name) < 3) throw new Exception("Nome inválido, deve conter mais de 2 letras");
+        if (strlen($name) < 3) throw new Exception("Nome inválido, deve conter mais de 2 letras");
         $this->name = $name;
     }
 
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     private function setEmail(string $email)
     {
-        if(filter_var($email, FILTER_VALIDATE_EMAIL) == false) throw new Exception("Email Inválido!");
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) throw new Exception("Email Inválido!");
         $this->email = $email;
     }
 
-    public function getTelephone() : string
-    { 
+    public function getTelephone(): string
+    {
         return $this->telephone;
     }
 
     private function setTelephone(string $telephone)
     {
         $this->telephone = $telephone;
+    }
+
+    public function objectToArray(): array
+    {
+        return [
+            "idPatient" => $this->idPatient,
+            "allergies" => $this->allergies,
+            "cpf"       => $this->cpf,
+            "name"      => $this->name,
+            "email"     => $this->email,
+            "telephone" => $this->telephone,
+        ];
     }
 }

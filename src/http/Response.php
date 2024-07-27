@@ -11,22 +11,22 @@ class Response
         header("Content-type: application/json");
         http_response_code($statusCode);
 
-
         echo json_encode($body);
     }
 
-    public static function generateToken($body)
-    {   
-        $payload = [
-            "exp" => time() + 40000,
-            "iat" => time(),
-            "email" => $body["email"],
-            "idUsuario" => $body["idUsuario"],
-            "permissao" => $body["idPermissao"]
-        ];
+    public static function responseSucess(array $data, int $responseCode)
+    {
+        self::responseMessage([
+            "error" => null,
+            "data" => $data
+        ], $responseCode);
+    }
 
-        $encode = JWT::encode($payload, $_ENV['KEY'], "HS256");
-
-        return $encode;
+    public static function responseError(string $error, int $responseCode)
+    {
+        self::responseMessage([
+            "error" => $error,
+            "data" => null
+        ], $responseCode);
     }
 }
