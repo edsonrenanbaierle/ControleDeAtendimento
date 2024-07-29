@@ -25,7 +25,7 @@ class PatientDAO
         return $patient;
     }
 
-    public static function getPatientById(string $idPatient): object
+    public static function getPatientById(string $idPatient): array
     {
         $sql = 'SELECT * FROM patient WHERE idPatient = :idPatient';
         $dbConn = DbConn::coon();
@@ -35,10 +35,15 @@ class PatientDAO
         $stmt->execute();
 
         $dbConn = null;
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $patient = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if(!$patient) throw new Exception("Id não encontrado", 404);
+        return $patient;
+
     }
 
-    public static function getAllPatient(): array
+    public static function getAllPatients(): array
     {
         $sql = 'SELECT * FROM patient';
         $dbConn = DbConn::coon();
@@ -46,7 +51,12 @@ class PatientDAO
         $stmt->execute();
 
         $dbConn = null;
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $patients = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if(!$patients) throw new Exception("Nenhum paciente cadastrado", 404);
+        return $patients;
+
     }
 
     public static function deletePatientById(string $idPatient): void
@@ -59,6 +69,8 @@ class PatientDAO
 
         $dbConn = null;
         $stmt->execute();
+        if($stmt->rowCount() == 0 ) throw new \Exception("Id do usuario não encontrado para remoção", 404);
+        
     }
 
     public static function updateAllDataPatient(Patient $patient): void
@@ -78,6 +90,6 @@ class PatientDAO
 
         $stmt->execute();
 
-        if($stmt->rowCount() == 0) throw new Exception("Id especificaod não encontrado para atualização");
+        if($stmt->rowCount() == 0) throw new Exception("Id especificaod não encontrado ou dados iguais");
     }
 }
