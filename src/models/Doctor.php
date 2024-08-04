@@ -6,16 +6,16 @@ use Exception;
 
 class Doctor
 {
-    private ?string $idDoctor;
     private string $name;
     private string $crm;
     private string $specialization;  
+    private ?string $idDoctor;
 
     function __construct(
-        string $idDoctor = null,
         string $name,
         string $crm,
-        string $specialization
+        string $specialization,
+        string $idDoctor = null
     )
     {
         $this->setIdDoctor($idDoctor);
@@ -63,5 +63,13 @@ class Doctor
     private function setSpecialization($specialization)
     {
         $this->specialization = $specialization;
+    }
+
+    public function objectToArray(){
+        return [
+            'name' => $this->name,
+            'crm' => $this->crm,
+            'specialization' => $this->specialization
+        ];
     }
 }

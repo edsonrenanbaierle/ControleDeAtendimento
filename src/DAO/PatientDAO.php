@@ -90,6 +90,6 @@ class PatientDAO
 
         $stmt->execute();
 
-        if($stmt->rowCount() == 0) throw new Exception("Id especificaod não encontrado ou dados iguais");
+        if($stmt->rowCount() == 0) throw new Exception("Id especificaodo não encontrado ou dados iguais");
     }
 }
