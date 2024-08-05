@@ -9,13 +9,13 @@ class Doctor
     private string $name;
     private string $crm;
     private string $specialization;  
-    private ?string $idDoctor;
+    private ?int $idDoctor;
 
     function __construct(
         string $name,
         string $crm,
         string $specialization,
-        string $idDoctor = null
+        int $idDoctor = null
     )
     {
         $this->setIdDoctor($idDoctor);
@@ -24,7 +24,7 @@ class Doctor
         $this->setSpecialization($specialization);
     }
     
-    public function getIdDoctor() : string
+    public function getIdDoctor() : int
     {
         return $this->idDoctor;
     }

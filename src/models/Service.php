@@ -7,39 +7,37 @@ use DateTimeImmutable;
 
 class Service
 {
-    private ?string $idService;
     private DateTimeImmutable $openingHours;
-    private Status $status;
-    private string $idDoctor;
-    private string $idPatient;
+    private int|string $idDoctor;
+    private int|string $idPatient;
+    private ?string $idService;
+    private ?Status $status;
 
     function __construct(
-        string $idService = null,
         DateTimeImmutable $openingHours,
-        Status $status,
-        string $idDoctor,
-        string $idPatient
-    )
-
-    {
+        int|string $idDoctor,
+        int|string $idPatient,
+        string $idService = null,
+        Status $status = null
+    ) {
         $this->setIdService($idService);
         $this->setOpeningHours($openingHours);
-        $this->setStatus($status);
+        $this->setStatus($status->value);
         $this->setIdDoctor($idDoctor);
         $this->setIdPatient($idPatient);
     }
-  
-    public function getIdService() : string
+
+    public function getIdService(): int|string
     {
         return $this->idService;
     }
 
-    private function setIdService(string $idService)
+    private function setIdService(null|string $idService)
     {
         $this->idService = $idService;
     }
 
-    public function getOpeningHours() : DateTimeImmutable
+    public function getOpeningHours(): DateTimeImmutable
     {
         return $this->openingHours;
     }
@@ -49,33 +47,43 @@ class Service
         $this->openingHours = $openingHours;
     }
 
-    public function getStatus() : string | Status
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    private function setStatus(Status $status)
+    private function setStatus(string|null $status)
     {
         $this->status = $status;
     }
 
-    public function getIdDoctor() : string
+    public function getIdDoctor(): int|string
     {
         return $this->idDoctor;
     }
 
-    public function setIdDoctor(string $idDoctor)
+    public function setIdDoctor(int|string $idDoctor)
     {
         $this->idDoctor = $idDoctor;
     }
 
-    public function getIdPatient() : string
+    public function getIdPatient(): int|string
     {
         return $this->idPatient;
     }
 
-    public function setIdPatient(string $idPatient)
+    public function setIdPatient(int|string $idPatient)
     {
         $this->idPatient = $idPatient;
+    }
+
+    public function objectToArray()
+    {
+        return [
+            'openingHours' => $this->getOpeningHours(),
+            'status' => $this->getStatus(),
+            'idDoctor' => $this->getIdDoctor(),
+            'idPatient' => $this->getidPatient()
+        ];
     }
 }

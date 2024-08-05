@@ -11,7 +11,7 @@ class Patient
     private string $name;
     private string $email;
     private string $telephone;
-    private ?string $idPatient;
+    private ?int $idPatient;
 
     function __construct(
         string $allergies,
@@ -19,7 +19,7 @@ class Patient
         string $name,
         string $email,
         string $telephone,
-        ?string $idPatient = null,
+        ?int $idPatient = null,
     ) {
         $this->setIdPatient($idPatient);
         $this->setAllergies($allergies);
@@ -29,12 +29,12 @@ class Patient
         $this->setTelephone($telephone);
     }
 
-    public function getIdPatient(): string
+    public function getIdPatient(): int
     {
         return $this->idPatient;
     }
 
-    private function setIdPatient(string|null $idPatient)
+    private function setIdPatient(int|null $idPatient)
     {
         $this->idPatient = $idPatient;
     }
